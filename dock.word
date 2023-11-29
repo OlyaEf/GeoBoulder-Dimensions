@@ -1,0 +1,64 @@
+# GeoBoulder-Dimensions
+
+## Project Overview
+The GeoBoulder-Dimensions script is designed for the processing of Multibeam Echosounder (MBES) data, specifically
+for calculating the dimensions of boulders on the seabed. This script takes manual inputs from MBES data processing
+(in the form of SHP files) and bathymetric data (in GeoTiff format) and automates the measurement of boulder
+dimensions including length, width, and height.
+
+## Methodology
+The script follows a straightforward methodology:
+1. **Reading Data**: It begins by reading the vector layer (SHP format) containing polygons that approximate the
+shape of the boulders and a gridded surface of bathymetric average values (GeoTiff format).
+2. **Calculating Centroids and Dimensions**: The script then calculates the centroids for each boulder polygon.
+It also measures the three key dimensions (length, width, and height) for each boulder.
+3. **Combining Results**: The final step involves combining these measurements into a single output vector layer
+(SHP format) with detailed attribute fields.
+
+## Installation and Usage
+To use the script, follow these steps:
+
+1. **Environment Setup**:
+   - Ensure Python 3.8 or higher is installed.
+   - Install Poetry for managing dependencies.
+
+2. **Clone the Repository**:
+git clone https://github.com/OlyaEf/GeoBoulder-Dimensions.git
+cd GeoBoulder-Dimensions
+
+
+3. **Install Dependencies**:
+poetry install
+
+
+4. **Run the Script**:
+python main.py
+
+
+## Testing the Script
+To test the script, navigate to the `tests` directory and run the test files using a Python test runner.
+These tests validate various functionalities of the script such as reading data, calculating centroids
+and dimensions, and generating the final output.
+
+Run tests via command in the activated Poetry environment:
+python -m unittest
+
+
+## Output Format
+The output of the script is a SHP file containing:
+- Points approximating the centroids of input boulder polygons.
+- Each point includes the following attributes:
+- `Poly_ID`: Polygon ID from the input data.
+- `Target ID`: Includes "MBES" value, block name, and target order number.
+- `Block`: User-provided value in the script settings.
+- `Easting`, `Northing`: Coordinates of the boulder centroid.
+- `Water depth`: Water depth at the boulder centroid location.
+- `Length`, `Width`, `Height`: Dimensions of the boulder in meters.
+
+The output layer is stored in the same folder as the input vector layer.
+
+## Compatibility with QGIS 3.28
+This script is compatible with QGIS 3.28. Users can import the output SHP file into QGIS to visualize and
+further analyze the data.
+
+
